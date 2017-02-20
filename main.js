@@ -15,6 +15,8 @@ $('#save-button').on('click', function() {
   var $uniqId = Date.now()
   var $quality = 'swill';
   var $newIdea = new IdeaObject ($uniqId, $title, $body, $quality);
+  var $newIdea = {$uniqId, $title, $body, $quality};
+
   var key = $newIdea.id;
   localStorage.setItem(key, JSON.stringify($newIdea));
   prependIdeaBox($newIdea);
@@ -46,11 +48,13 @@ function prependIdeaBox(ideaObj) {
   )
 }
 
-$('.idea-box-container').on('click', '.delete-button', (function() {
+$('.idea-box-container').on('click', '.delete-button', removeCard);
+
+function removeCard(){
   var selectId = $(this).parents('.idea-card').attr('id')
   $(this).parents('.idea-card').remove()
   localStorage.removeItem(selectId)
-}))
+}
 
 function resetInputs(){
   $('#title-input, #body-input').val("");
