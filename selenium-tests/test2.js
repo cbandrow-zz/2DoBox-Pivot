@@ -27,8 +27,8 @@ function printTitle(driver) {
   driver.findElement(By.id('save-button')).click();
 
   driver.sleep(3000).then(function() {
-    driver.findElement(By.className('todo-title')).getText().then(function(todo) {
-      if(todo === 'TEST!!') {
+    driver.findElement(By.className('todo-title')).getText().then(function(title) {
+      if(title === 'TEST!!') {
         console.log('Test passed');
       } else {
         console.log('Test failed');
