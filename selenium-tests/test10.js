@@ -15,12 +15,12 @@ var driver_fx = new webdriver.Builder()
 //     .forBrowser('safari')
 //     .build();
 
-searchTest(driver_chr);
-searchTest(driver_fx);
-// searchTest(driver_saf);
+searchTitleTest(driver_chr);
+searchTitleTest(driver_fx);
+// searchTitleTest(driver_saf);
 
 
-function searchTest(driver) {
+function searchTitleTest(driver) {
   driver.get('https://cbandrow.github.io/2DoBox-Pivot/');
   driver.findElement(By.id('title-input')).sendKeys('TEST!!');
   driver.findElement(By.id('body-input')).sendKeys('THIS IS A TEST OF THE EMERGENCY BROADCAST SYSTEM: THIS IS ONLY A TEST. PLEASE REMAIN CALM.');
