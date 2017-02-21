@@ -30,7 +30,7 @@ function searchBodyTest(driver) {
 
 
   driver.sleep(3000).then(function() {
-    driver.findElement(By.className('idea-body')).getText().then(function(body) {
+    driver.findElement(By.className('todo-body')).getText().then(function(body) {
       if(body === 'THIS IS A TEST OF THE EMERGENCY BROADCAST SYSTEM: THIS IS ONLY A TEST. PLEASE REMAIN CALM.') {
         console.log('Test passed');
       } else {

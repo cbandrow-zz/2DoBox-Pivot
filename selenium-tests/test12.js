@@ -25,13 +25,13 @@ function editBody(driver) {
  driver.findElement(By.id('title-input')).sendKeys('TEST!!');
  driver.findElement(By.id('body-input')).sendKeys('THIS IS A TEST OF THE EMERGENCY BROADCAST SYSTEM: THIS IS ONLY A TEST. PLEASE REMAIN CALM.');
  driver.findElement(By.id('save-button')).click();
- driver.findElement(By.className('idea-body')).sendKeys('FOR SURE GOOD SIR!');
+ driver.findElement(By.className('todo-body')).sendKeys('FOR SURE GOOD SIR!');
  driver.findElement(By.className('top-section')).click();
 
  driver.navigate().refresh();
 
  driver.sleep(3000).then(function() {
-   driver.findElement(By.className('idea-title')).getText().then(function(body) {
+   driver.findElement(By.className('todo-title')).getText().then(function(body) {
      if(body != 'THIS IS A TEST OF THE EMERGENCY BROADCAST SYSTEM: THIS IS ONLY A TEST. PLEASE REMAIN CALM.') {
        console.log('Test passed');
      } else {

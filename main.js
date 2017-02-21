@@ -14,7 +14,7 @@ $('#save-button').on('click', function() {
   var $body = $('#body-input').val();
   var $uniqId = Date.now();
   var $quality = 'swill';
-  var $new2Do = new IdeaObject ($uniqId, $title, $body, $quality);
+  var $new2Do = new toDoObject ($uniqId, $title, $body, $quality);
 
   var key = $new2Do.id;
   localStorage.setItem(key, JSON.stringify($new2Do));
@@ -22,7 +22,7 @@ $('#save-button').on('click', function() {
   resetInputs();
 });
 
-function IdeaObject (id, title, body, quality){
+function toDoObject (id, title, body, quality){
   this.id = id;
   this.title = title;
   this.body = body;
@@ -31,11 +31,11 @@ function IdeaObject (id, title, body, quality){
 
 function prepend2DoBox(toDoObj) {
   $('.todo-box-container').prepend(
-    `<article class="idea-card" id="${toDoObj.id}">
+    `<article class="todo-card" id="${toDoObj.id}">
       <button class="delete-button"></button>
       <section class="search-target">
-      <h2 class="idea-title" contenteditable>${toDoObj.title}</h2>
-      <p class="idea-body" contenteditable>${toDoObj.body}</p>
+      <h2 class="todo-title" contenteditable>${toDoObj.title}</h2>
+      <p class="todo-body" contenteditable>${toDoObj.body}</p>
       </section>
       <section class="quality">
         <button class="upvote-button"></button>

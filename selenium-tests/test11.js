@@ -25,13 +25,13 @@ function editTitle(driver) {
  driver.findElement(By.id('title-input')).sendKeys('TEST!!');
  driver.findElement(By.id('body-input')).sendKeys('THIS IS A TEST OF THE EMERGENCY BROADCAST SYSTEM: THIS IS ONLY A TEST. PLEASE REMAIN CALM.');
  driver.findElement(By.id('save-button')).click();
- driver.findElement(By.className('idea-title')).sendKeys('HELLO!');
+ driver.findElement(By.className('todo-title')).sendKeys('HELLO!');
  driver.findElement(By.className('top-section')).click();
 
  driver.navigate().refresh();
 
  driver.sleep(3000).then(function() {
-   driver.findElement(By.className('idea-title')).getText().then(function(title) {
+   driver.findElement(By.className('todo-title')).getText().then(function(title) {
      if(title != 'TEST!!') {
        console.log('Test passed');
      } else {

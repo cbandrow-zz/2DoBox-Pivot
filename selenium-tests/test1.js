@@ -23,7 +23,7 @@ function findSite(driver) {
 
   driver.sleep(2000).then(function() {
     driver.getTitle().then(function(title) {
-      if(title === 'idea box') {
+      if(title === 'todo box') {
         console.log('Test passed');
       } else {
         console.log('Test failed');

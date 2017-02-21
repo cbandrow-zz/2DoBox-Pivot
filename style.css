@@ -10,7 +10,7 @@ h1 {
   font-family: "Roboto Slab", serif;
 }
 
-.make-idea-teal {
+.make-todo-teal {
   color: #00A79D;
 }
 
@@ -73,7 +73,7 @@ input:focus {
   margin-top: 10px;
 }
 
-.idea-box-container {
+.todo-box-container {
   align-items: center;
   display: flex;
   flex-direction: column;
