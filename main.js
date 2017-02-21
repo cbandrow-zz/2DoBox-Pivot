@@ -91,7 +91,7 @@ $('.todo-box-container').on('click','.downvote-button', function() {
   localStorage.setItem(key, JSON.stringify(toDoBox));
 });
 
-$('.todo-box-container').on('focus', '.idea-title, .idea-body', function() {
+$('.todo-box-container').on('focus', '.todo-title, .todo-body', function() {
   var key = $(this).closest('.todo-card').attr('id');
   var todobox = JSON.parse(localStorage.getItem(key));
   $(this).on('keydown', function(event) {
@@ -103,8 +103,8 @@ $('.todo-box-container').on('focus', '.idea-title, .idea-body', function() {
   });
 
   $(this).on('blur', function() {
-    todobox.title = $(this).closest('.todo-card').find('.idea-title').text();
-    todobox.body = $(this).closest('.todo-card').find('.idea-body').text();
+    todobox.title = $(this).closest('.todo-card').find('.todo-title').text();
+    todobox.body = $(this).closest('.todo-card').find('.todo-body').text();
     localStorage.setItem(key, JSON.stringify(todobox));
   });
 });
