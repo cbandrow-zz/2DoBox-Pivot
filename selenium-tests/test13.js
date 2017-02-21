@@ -15,24 +15,26 @@ var driver_fx = new webdriver.Builder()
 //     .forBrowser('safari')
 //     .build();
 
-editTitle(driver_chr);
-editTitle(driver_fx);
+deleteCard(driver_chr);
+deleteCard(driver_fx);
 // editTitle(driver_saf);
 
 
-function editTitle(driver) {
+function deleteCard(driver) {
  driver.get('https://cbandrow.github.io/2DoBox-Pivot/');
- driver.findElement(By.id('title-input')).sendKeys('TEST!!');
- driver.findElement(By.id('body-input')).sendKeys('THIS IS A TEST OF THE EMERGENCY BROADCAST SYSTEM: THIS IS ONLY A TEST. PLEASE REMAIN CALM.');
+ driver.findElement(By.id('title-input')).sendKeys('Added Test');
+ driver.findElement(By.id('body-input')).sendKeys('More testing content.');
  driver.findElement(By.id('save-button')).click();
- driver.findElement(By.className('idea-title')).sendKeys('HELLO!');
- driver.findElement(By.className('top-section')).click();
-
- driver.navigate().refresh();
+ driver.sleep(1500);
+ driver.findElement(By.id('title-input')).sendKeys('Some more test');
+ driver.findElement(By.id('body-input')).sendKeys('adding test stuff.');
+ driver.findElement(By.id('save-button')).click();
+ driver.sleep(1500);
+ driver.findElement(By.className('delete-button')).click();
 
  driver.sleep(3000).then(function() {
    driver.findElement(By.className('idea-title')).getText().then(function(title) {
-     if(title != 'TEST!!') {
+     if(title != 'Some more test') {
        console.log('Test passed');
      } else {
        console.log('Test failed');

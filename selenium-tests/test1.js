@@ -14,11 +14,11 @@ var driver_saf = new webdriver.Builder()
     .forBrowser('safari')
     .build();
 
-searchTest(driver_chr);
-searchTest(driver_fx);
-searchTest(driver_saf);
+findSite(driver_chr);
+findSite(driver_fx);
+findSite(driver_saf);
 
-function searchTest(driver) {
+function findSite(driver) {
   driver.get('https://cbandrow.github.io/2DoBox-Pivot/');
 
   driver.sleep(2000).then(function() {

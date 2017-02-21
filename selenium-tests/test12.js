@@ -15,24 +15,24 @@ var driver_fx = new webdriver.Builder()
 //     .forBrowser('safari')
 //     .build();
 
-editTitle(driver_chr);
-editTitle(driver_fx);
+editBody(driver_chr);
+editBody(driver_fx);
 // editTitle(driver_saf);
 
 
-function editTitle(driver) {
+function editBody(driver) {
  driver.get('https://cbandrow.github.io/2DoBox-Pivot/');
  driver.findElement(By.id('title-input')).sendKeys('TEST!!');
  driver.findElement(By.id('body-input')).sendKeys('THIS IS A TEST OF THE EMERGENCY BROADCAST SYSTEM: THIS IS ONLY A TEST. PLEASE REMAIN CALM.');
  driver.findElement(By.id('save-button')).click();
- driver.findElement(By.className('idea-title')).sendKeys('HELLO!');
+ driver.findElement(By.className('idea-body')).sendKeys('FOR SURE GOOD SIR!');
  driver.findElement(By.className('top-section')).click();
 
  driver.navigate().refresh();
 
  driver.sleep(3000).then(function() {
-   driver.findElement(By.className('idea-title')).getText().then(function(title) {
-     if(title != 'TEST!!') {
+   driver.findElement(By.className('idea-title')).getText().then(function(body) {
+     if(body != 'THIS IS A TEST OF THE EMERGENCY BROADCAST SYSTEM: THIS IS ONLY A TEST. PLEASE REMAIN CALM.') {
        console.log('Test passed');
      } else {
        console.log('Test failed');

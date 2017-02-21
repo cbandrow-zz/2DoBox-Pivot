@@ -15,12 +15,12 @@ var driver_fx = new webdriver.Builder()
 //     .forBrowser('safari')
 //     .build();
 
-searchTest(driver_chr);
-searchTest(driver_fx);
-// searchTest(driver_saf);
+downvoteTest2(driver_chr);
+downvoteTest2(driver_fx);
+// downvoteTest2(driver_saf);
 
 
-function searchTest(driver) {
+function downvoteTest2(driver) {
   driver.get('https://cbandrow.github.io/2DoBox-Pivot/');
   driver.findElement(By.id('title-input')).sendKeys('TEST!!');
   driver.findElement(By.id('body-input')).sendKeys('THIS IS A TEST OF THE EMERGENCY BROADCAST SYSTEM: THIS IS ONLY A TEST. PLEASE REMAIN CALM.');
@@ -33,8 +33,8 @@ function searchTest(driver) {
 
 
   driver.sleep(3000).then(function() {
-    driver.findElement(By.className('current-quality')).getText().then(function(title) {
-      if(title === 'swill') {
+    driver.findElement(By.className('current-quality')).getText().then(function(quality) {
+      if(quality === 'swill') {
         console.log('Test passed');
       } else {
         console.log('Test failed');
