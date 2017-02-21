@@ -30,7 +30,7 @@ function searchTitleTest(driver) {
 
 
   driver.sleep(3000).then(function() {
-    driver.findElement(By.className('idea-title')).getText().then(function(title) {
+    driver.findElement(By.className('todo-title')).getText().then(function(title) {
       if(title === 'TEST!!') {
         console.log('Test passed');
       } else {

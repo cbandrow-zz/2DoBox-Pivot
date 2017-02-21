@@ -26,7 +26,7 @@ function printBody(driver) {
   driver.findElement(By.id('body-input')).sendKeys('THIS IS A TEST OF THE EMERGENCY BROADCAST SYSTEM: THIS IS ONLY A TEST. PLEASE REMAIN CALM.');
   driver.findElement(By.id('save-button')).click();
   driver.sleep(3000).then(function() {
-    driver.findElement(By.className('idea-body')).getText().then(function(body) {
+    driver.findElement(By.className('todo-body')).getText().then(function(body) {
       if(body === 'THIS IS A TEST OF THE EMERGENCY BROADCAST SYSTEM: THIS IS ONLY A TEST. PLEASE REMAIN CALM.') {
         console.log('Test passed');
       } else {
