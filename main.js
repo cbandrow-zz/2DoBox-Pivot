@@ -10,24 +10,16 @@ function getStored2Dos (id) {
 }
 
 $('#save-button').on('click', function() {
-  var $title = $('#title-input').val();
-  var $body = $('#body-input').val();
-  var $uniqId = Date.now();
-  var $quality = 'swill';
-  var $new2Do = new toDoObject ($uniqId, $title, $body, $quality);
-
+  var title = $('#title-input').val();
+  var body = $('#body-input').val();
+  var id = Date.now();
+  var quality = 'swill';
+  var $new2Do = {title, body, id, quality}
   var key = $new2Do.id;
   localStorage.setItem(key, JSON.stringify($new2Do));
   prepend2DoBox($new2Do);
   resetInputs();
 });
-
-function toDoObject (id, title, body, quality){
-  this.id = id;
-  this.title = title;
-  this.body = body;
-  this.quality = quality;
-}
 
 function prepend2DoBox(toDoObj) {
   $('.todo-box-container').prepend(
@@ -53,7 +45,6 @@ $('.todo-box-container').on('click', '.delete-button', (function() {
   localStorage.removeItem(selectId)
 }))
 
-
 function resetInputs(){
   $('#title-input, #body-input').val("");
   $('#save-button').prop('disabled', true);
@@ -72,9 +63,7 @@ $('.todo-box-container').on('click','.upvote-button' , function() {
   }
   var key = $(this).closest('.todo-card').attr('id');
   var updatedQuality = $currentQuality.text();
-  var toDoBox = JSON.parse(localStorage.getItem(key));
-  toDoBox.quality = updatedQuality;
-  localStorage.setItem(key, JSON.stringify(toDoBox));
+  changeQuality(key, updatedQuality);
 });
 
 $('.todo-box-container').on('click','.downvote-button', function() {
@@ -86,28 +75,39 @@ $('.todo-box-container').on('click','.downvote-button', function() {
   }
   var key = $(this).closest('.todo-card').attr('id');
   var updatedQuality = $currentQuality.text();
+  changeQuality(key, updatedQuality);
+});
+
+function changeQuality(key, updatedQuality){
   var toDoBox = JSON.parse(localStorage.getItem(key));
   toDoBox.quality = updatedQuality;
   localStorage.setItem(key, JSON.stringify(toDoBox));
-});
+}
+
+//When working with COMPLETED states for project, use conditional to evaluate if completed or not, using OR and BANG (!);
+//if completed || not completed then this.completed == this.completed
 
 $('.todo-box-container').on('focus', '.todo-title, .todo-body', function() {
-  var key = $(this).closest('.todo-card').attr('id');
+  var $container = $(this);
+  var key = $container.closest('.todo-card').attr('id');
   var todobox = JSON.parse(localStorage.getItem(key));
-  $(this).on('keydown', function(event) {
+  $container.on('keydown', function(event) {
     if(event.keyCode === 13){
       event.preventDefault();
-      $(this).blur();
+      $container.blur();
       return false;
     }
   });
+  saveChange($container, key, todobox);
+});
 
-  $(this).on('blur', function() {
-    todobox.title = $(this).closest('.todo-card').find('.todo-title').text();
-    todobox.body = $(this).closest('.todo-card').find('.todo-body').text();
+function saveChange($container, key, todobox){
+  $container.on('blur', function() {
+    todobox.title = $container.closest('.todo-card').find('.todo-title').text();
+    todobox.body = $container.closest('.todo-card').find('.todo-body').text();
     localStorage.setItem(key, JSON.stringify(todobox));
   });
-});
+};
 
 $('#search-input').on('keyup',function (){
   var searchValue = $(this).val().toLowerCase();
