@@ -82,7 +82,8 @@ input:focus {
 }
 
 .complete-task{
-  background-color: #bbbbbb;
+  /*text-decoration: line-through; */
+  background-color: #eeeeee;
 }
 
 article {

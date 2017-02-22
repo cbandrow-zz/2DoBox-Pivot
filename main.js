@@ -1,31 +1,30 @@
 $(function () {
   for (var i = 0; i < localStorage.length; i++){
     var $stored2Dos = getStored2Dos(localStorage.key(i));
-    changeClass($stored2Dos);
     prepend2DoBox($stored2Dos);
-
+    changeClass($stored2Dos);
   }
 });
 
 function changeClass($stored2Dos){
+  console.log($stored2Dos)
+  var num = $stored2Dos.completed;
+  var someId = $stored2Dos.id
+  console.log(someId);
   if($stored2Dos.completed == true){
-    console.log($stored2Dos);
     var $completedId = $stored2Dos.id;
-    console.log($completedId);
-    $('.todo-box-container').find($completedId).css('complete-task');
-  }else if ($stored2Dos.completed == false){
+    $('#'+ $completedId).removeClass('complete-task').addClass('complete-task');
+    console.log("class added")
+  } else if ($stored2Dos.completed == false){
     var $completedId = $stored2Dos.id;
-    console.log($completedId);
-    $('.todo-box-container').find($completedId).removeClass('complete-task');
+    $('#' + $completedId).removeClass('complete-task');
     console.log("No class added.");
   }
+
 }
 function getStored2Dos (id) {
   return JSON.parse(localStorage.getItem(id));
 }
-// function getStoredCompletes(completed){
-//   return JSON.parse(localStorage.getItem(completed));
-// }
 
 $('#save-button').on('click', function() {
   var title = $('#title-input').val();
