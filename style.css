@@ -66,6 +66,26 @@ input:focus {
   background-color: #6D6E71;
 }
 
+#more-todos {
+  background-color: #00A79D;
+  border: none;
+  box-sizing: border-box;
+  color: #FFF;
+  font-family: "Open Sans", sans-serif;
+  font-size: 18px;
+  height: 35px;
+  margin: 7px 0 18px 0;
+  width: 60%;
+}
+
+#more-todos:hover {
+  background-color: #045E55;
+}
+
+#more-todos:disabled {
+  background-color: #6D6E71;
+}
+
 .bottom-section {
   align-items: center;
   display: flex;
