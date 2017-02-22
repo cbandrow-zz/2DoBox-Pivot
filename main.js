@@ -26,9 +26,9 @@ $('#save-button').on('click', function() {
   var title = $('#title-input').val();
   var body = $('#body-input').val();
   var id = Date.now();
-  var quality = 'swill';
+  var priority = 'None';
   var completed = false;
-  var $new2Do = {title, body, id, quality, completed}
+  var $new2Do = {title, body, id, priority, completed}
   var key = $new2Do.id;
   localStorage.setItem(key, JSON.stringify($new2Do));
   prepend2DoBox($new2Do);
@@ -45,11 +45,11 @@ $('#save-button').on('click', function() {
 //     <h2 class="todo-title" contenteditable>${toDoObj.title}</h2>
 //     <p class="todo-body" contenteditable>${toDoObj.body}</p>
 //     </section>
-//     <section class="quality">
+//     <section class="priority">
 //       <button class="upvote-button"></button>
 //       <button class="downvote-button"></button>
 //       <button class="completed"> Completed Task</button>
-//       <h3>quality: <span class="current-quality">${toDoObj.quality}</span></h3>
+//       <h3>priority: <span class="current-priority">${toDoObj.priority}</span></h3>
 //     </section>
 //   </article>
 //   `
@@ -65,11 +65,11 @@ function prepend2DoBox(toDoObj) {
         <h2 class="todo-title" contenteditable>${toDoObj.title}</h2>
         <p class="todo-body" contenteditable>${toDoObj.body}</p>
         </section>
-        <section class="quality">
+        <section class="priority">
           <button class="upvote-button"></button>
           <button class="downvote-button"></button>
           <button class="completed"> Completed Task</button>
-          <h3>quality: <span class="current-quality">${toDoObj.quality}</span></h3>
+          <h3>priority: <span class="current-priority">${toDoObj.priority}</span></h3>
         </section>
       </article>
       `);
@@ -81,11 +81,11 @@ function prepend2DoBox(toDoObj) {
           <h2 class="todo-title" contenteditable>${toDoObj.title}</h2>
           <p class="todo-body" contenteditable>${toDoObj.body}</p>
           </section>
-          <section class="quality">
+          <section class="priority">
             <button class="upvote-button"></button>
             <button class="downvote-button"></button>
             <button class="completed"> Completed Task</button>
-            <h3>quality: <span class="current-quality">${toDoObj.quality}</span></h3>
+            <h3>priority: <span class="current-priority">${toDoObj.priority}</span></h3>
           </section>
         </article>
         `
@@ -109,34 +109,84 @@ $('#title-input, #body-input').on('keyup', function(){
 });
 
 $('.todo-box-container').on('click','.upvote-button' , function() {
-  var $currentQuality = $(this).closest('.todo-card').find('.current-quality');
-  if ($currentQuality.text() === "swill") {
-    $currentQuality.text("plausible");
-  } else if ($currentQuality.text() === "plausible"){
-    $currentQuality.text("genius");
-  }
+  var $currentPriority = $(this).closest('.todo-card').find('.current-priority');
   var key = $(this).closest('.todo-card').attr('id');
-  var updatedQuality = $currentQuality.text();
-  changeQuality(key, updatedQuality);
+  switch ($currentPriority.text()) {
+    case "None":
+      $currentPriority.text("Low");
+      break;
+    case "Low":
+      $currentPriority.text("Medium");
+      break;
+    case "Medium":
+      $currentPriority.text("High");
+      break;
+    case "High":
+      $currentPriority.text("Critical");
+      break;
+    default:
+    $currentPriority.text("Critical");
+  }
+  updatedPriority = $currentPriority.text();
+  changePriority(key, updatedPriority);
 });
 
-$('.todo-box-container').on('click','.downvote-button', function() {
-  var $currentQuality = $(this).closest('.todo-card').find('.current-quality');
-  if ($currentQuality.text() === "genius") {
-    $currentQuality.text("plausible");
-  } else if ($currentQuality.text() === "plausible"){
-    $currentQuality.text("swill");
-  }
+$('.todo-box-container').on('click','.downvote-button' , function() {
+  var $currentPriority = $(this).closest('.todo-card').find('.current-priority');
   var key = $(this).closest('.todo-card').attr('id');
-  var updatedQuality = $currentQuality.text();
-  changeQuality(key, updatedQuality);
+  switch ($currentPriority.text()) {
+    case "Critical":
+      $currentPriority.text("High");
+      break;
+    case "High":
+      $currentPriority.text("Medium");
+      break;
+    case "Medium":
+      $currentPriority.text("Low");
+      break;
+    case "Low":
+      $currentPriority.text("None");
+      break;
+    default:
+    $currentPriority.text("None");
+  }
+  updatedPriority = $currentPriority.text();
+  changePriority(key, updatedPriority);
 });
 
-function changeQuality(key, updatedQuality){
+function changePriority(key, updatedPriority){
   var toDoBox = JSON.parse(localStorage.getItem(key));
-  toDoBox.quality = updatedQuality;
+  toDoBox.priority = updatedPriority;
   localStorage.setItem(key, JSON.stringify(toDoBox));
 }
+
+
+
+
+//   var $currentPriority = $(this).closest('.todo-card').find('.current-priority');
+//   if ($currentPriority.text() === "swill") {
+//     $currentPriority.text("plausible");
+//   } else if ($currentPriority.text() === "plausible"){
+//     $currentPriority.text("genius");
+//   }
+//   var key = $(this).closest('.todo-card').attr('id');
+//   var updatedPriority = $currentPriority.text();
+//   changePriority(key, updatedPriority);
+// });
+
+$('.todo-box-container').on('click','.downvote-button', function() {
+  var $currentPriority = $(this).closest('.todo-card').find('.current-priority');
+  if ($currentPriority.text() === "genius") {
+    $currentPriority.text("plausible");
+  } else if ($currentPriority.text() === "plausible"){
+    $currentPriority.text("swill");
+  }
+  var key = $(this).closest('.todo-card').attr('id');
+  var updatedPriority = $currentPriority.text();
+  changePriority(key, updatedPriority);
+});
+
+
 
 $('.todo-box-container').on('click', '.completed', function() {
   var $selectId = $(this).parents('.todo-card').attr('id');
@@ -149,6 +199,7 @@ $('.todo-box-container').on('click', '.completed', function() {
     $(this).parents('.todo-card').toggleClass('complete-task');
   }
   localStorage.setItem($selectId, JSON.stringify(todobox));
+  console.log(todobox.priority);
 });
 
 $('#show-completed').on('click', function() {
