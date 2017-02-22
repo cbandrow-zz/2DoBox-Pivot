@@ -3,7 +3,18 @@ $(function () {
     var $stored2Dos = getStored2Dos(localStorage.key(i));
     prepend2DoBox($stored2Dos);
     changeClass($stored2Dos);
+    hideToDos();
   }
+});
+
+function hideToDos(){
+  $("article").slice(0,9).css("display", "block");
+  $("article").slice(10).css("display", "none");
+}
+
+$('#more-todos').on('click', function() {
+  $("article").slice(0,14).css("display", "block");
+  $("article").slice(15).css("display", "none");
 });
 
 function changeClass($stored2Dos){
@@ -59,7 +70,7 @@ $('#save-button').on('click', function() {
 function prepend2DoBox(toDoObj) {
     if(toDoObj.completed == true){
       // printToDo(toDoObj);
-      $('.todo-box-container').append(`<article class="todo-card" id="${toDoObj.id}">
+      $('.todo-box-container').append(`<article class="todo-card hidden" id="${toDoObj.id}">
         <button class="delete-button"></button>
         <section class="search-target">
         <h2 class="todo-title" contenteditable>${toDoObj.title}</h2>
@@ -75,7 +86,7 @@ function prepend2DoBox(toDoObj) {
       `);
     } else if (toDoObj.completed == false){
       $('.todo-box-container').prepend(
-        `<article class="todo-card" id="${toDoObj.id}">
+        `<article class="todo-card hidden" id="${toDoObj.id}">
           <button class="delete-button"></button>
           <section class="search-target">
           <h2 class="todo-title" contenteditable>${toDoObj.title}</h2>
@@ -93,20 +104,24 @@ function prepend2DoBox(toDoObj) {
   }
 }
 
+
 $('.todo-box-container').on('click', '.delete-button', (function() {
   var selectId = $(this).parents('.todo-card').attr('id')
   $(this).parents('.todo-card').remove()
   localStorage.removeItem(selectId)
 }))
 
+
 function resetInputs(){
   $('#title-input, #body-input').val("");
   $('#save-button').prop('disabled', true);
 }
 
+
 $('#title-input, #body-input').on('keyup', function(){
   $('#save-button').prop('disabled', false);
 });
+
 
 $('.todo-box-container').on('click','.upvote-button' , function() {
   var $currentPriority = $(this).closest('.todo-card').find('.current-priority');
@@ -131,6 +146,7 @@ $('.todo-box-container').on('click','.upvote-button' , function() {
   changePriority(key, updatedPriority);
 });
 
+
 $('.todo-box-container').on('click','.downvote-button' , function() {
   var $currentPriority = $(this).closest('.todo-card').find('.current-priority');
   var key = $(this).closest('.todo-card').attr('id');
@@ -154,25 +170,13 @@ $('.todo-box-container').on('click','.downvote-button' , function() {
   changePriority(key, updatedPriority);
 });
 
+
 function changePriority(key, updatedPriority){
   var toDoBox = JSON.parse(localStorage.getItem(key));
   toDoBox.priority = updatedPriority;
   localStorage.setItem(key, JSON.stringify(toDoBox));
 }
 
-
-
-
-//   var $currentPriority = $(this).closest('.todo-card').find('.current-priority');
-//   if ($currentPriority.text() === "swill") {
-//     $currentPriority.text("plausible");
-//   } else if ($currentPriority.text() === "plausible"){
-//     $currentPriority.text("genius");
-//   }
-//   var key = $(this).closest('.todo-card').attr('id');
-//   var updatedPriority = $currentPriority.text();
-//   changePriority(key, updatedPriority);
-// });
 
 $('.todo-box-container').on('click','.downvote-button', function() {
   var $currentPriority = $(this).closest('.todo-card').find('.current-priority');
@@ -185,7 +189,6 @@ $('.todo-box-container').on('click','.downvote-button', function() {
   var updatedPriority = $currentPriority.text();
   changePriority(key, updatedPriority);
 });
-
 
 
 $('.todo-box-container').on('click', '.completed', function() {
@@ -202,9 +205,11 @@ $('.todo-box-container').on('click', '.completed', function() {
   console.log(todobox.priority);
 });
 
+
 $('#show-completed').on('click', function() {
   $(".complete-task").prependTo($('.todo-box-container'));
 });
+
 
 $('.todo-box-container').on('focus', '.todo-title, .todo-body', function() {
   var $container = $(this);
@@ -220,6 +225,7 @@ $('.todo-box-container').on('focus', '.todo-title, .todo-body', function() {
   saveChange($container, key, todobox);
 });
 
+
 function saveChange($container, key, todobox){
   $container.on('blur', function() {
     todobox.title = $container.closest('.todo-card').find('.todo-title').text();
@@ -227,6 +233,7 @@ function saveChange($container, key, todobox){
     localStorage.setItem(key, JSON.stringify(todobox));
   });
 };
+
 
 $('#search-input').on('keyup',function (){
   var searchValue = $(this).val().toLowerCase();
