@@ -7,18 +7,14 @@ $(function () {
 });
 
 function changeClass($stored2Dos){
-  console.log($stored2Dos)
   var num = $stored2Dos.completed;
   var someId = $stored2Dos.id
-  console.log(someId);
   if($stored2Dos.completed == true){
     var $completedId = $stored2Dos.id;
     $('#'+ $completedId).removeClass('complete-task').addClass('complete-task');
-    console.log("class added")
   } else if ($stored2Dos.completed == false){
     var $completedId = $stored2Dos.id;
     $('#' + $completedId).removeClass('complete-task');
-    console.log("No class added.");
   }
 
 }
@@ -39,23 +35,63 @@ $('#save-button').on('click', function() {
   resetInputs();
 });
 
+var string;
+
+function printToDo(toDoObj){
+  console.log(toDoObj);
+
+  string = `<article class="todo-card" id="${toDoObj.id}">
+    <button class="delete-button"></button>
+    <section class="search-target">
+    <h2 class="todo-title" contenteditable>${toDoObj.title}</h2>
+    <p class="todo-body" contenteditable>${toDoObj.body}</p>
+    </section>
+    <section class="quality">
+      <button class="upvote-button"></button>
+      <button class="downvote-button"></button>
+      <button class="completed"> Completed Task</button>
+      <h3>quality: <span class="current-quality">${toDoObj.quality}</span></h3>
+    </section>
+  </article>
+  `
+  console.log(string);
+}
+
 function prepend2DoBox(toDoObj) {
-  $('.todo-box-container').prepend(
-    `<article class="todo-card" id="${toDoObj.id}">
-      <button class="delete-button"></button>
-      <section class="search-target">
-      <h2 class="todo-title" contenteditable>${toDoObj.title}</h2>
-      <p class="todo-body" contenteditable>${toDoObj.body}</p>
-      </section>
-      <section class="quality">
-        <button class="upvote-button"></button>
-        <button class="downvote-button"></button>
-        <button class="completed"> Completed Task</button>
-        <h3>quality: <span class="current-quality">${toDoObj.quality}</span></h3>
-      </section>
-    </article>
-    `
-  );
+    if(toDoObj.completed == true){
+      printToDo(toDoObj);
+      $('.todo-box-container').append(`<article class="todo-card" id="${toDoObj.id}">
+        <button class="delete-button"></button>
+        <section class="search-target">
+        <h2 class="todo-title" contenteditable>${toDoObj.title}</h2>
+        <p class="todo-body" contenteditable>${toDoObj.body}</p>
+        </section>
+        <section class="quality">
+          <button class="upvote-button"></button>
+          <button class="downvote-button"></button>
+          <button class="completed"> Completed Task</button>
+          <h3>quality: <span class="current-quality">${toDoObj.quality}</span></h3>
+        </section>
+      </article>
+      `);
+    } else if (toDoObj.completed == false){
+      $('.todo-box-container').prepend(
+        `<article class="todo-card" id="${toDoObj.id}">
+          <button class="delete-button"></button>
+          <section class="search-target">
+          <h2 class="todo-title" contenteditable>${toDoObj.title}</h2>
+          <p class="todo-body" contenteditable>${toDoObj.body}</p>
+          </section>
+          <section class="quality">
+            <button class="upvote-button"></button>
+            <button class="downvote-button"></button>
+            <button class="completed"> Completed Task</button>
+            <h3>quality: <span class="current-quality">${toDoObj.quality}</span></h3>
+          </section>
+        </article>
+        `
+      )
+  }
 }
 
 $('.todo-box-container').on('click', '.delete-button', (function() {
