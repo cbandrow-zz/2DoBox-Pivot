@@ -1,20 +1,39 @@
 $(function () {
   for (var i = 0; i < localStorage.length; i++){
     var $stored2Dos = getStored2Dos(localStorage.key(i));
+    changeClass($stored2Dos);
     prepend2DoBox($stored2Dos);
+
   }
 });
 
+function changeClass($stored2Dos){
+  if($stored2Dos.completed == true){
+    console.log($stored2Dos);
+    var $completedId = $stored2Dos.id;
+    console.log($completedId);
+    $('.todo-box-container').find($completedId).css('complete-task');
+  }else if ($stored2Dos.completed == false){
+    var $completedId = $stored2Dos.id;
+    console.log($completedId);
+    $('.todo-box-container').find($completedId).removeClass('complete-task');
+    console.log("No class added.");
+  }
+}
 function getStored2Dos (id) {
   return JSON.parse(localStorage.getItem(id));
 }
+// function getStoredCompletes(completed){
+//   return JSON.parse(localStorage.getItem(completed));
+// }
 
 $('#save-button').on('click', function() {
   var title = $('#title-input').val();
   var body = $('#body-input').val();
   var id = Date.now();
   var quality = 'swill';
-  var $new2Do = {title, body, id, quality}
+  var completed = false;
+  var $new2Do = {title, body, id, quality, completed}
   var key = $new2Do.id;
   localStorage.setItem(key, JSON.stringify($new2Do));
   prepend2DoBox($new2Do);
@@ -32,6 +51,7 @@ function prepend2DoBox(toDoObj) {
       <section class="quality">
         <button class="upvote-button"></button>
         <button class="downvote-button"></button>
+        <button class="completed"> Completed Task</button>
         <h3>quality: <span class="current-quality">${toDoObj.quality}</span></h3>
       </section>
     </article>
@@ -83,6 +103,18 @@ function changeQuality(key, updatedQuality){
   toDoBox.quality = updatedQuality;
   localStorage.setItem(key, JSON.stringify(toDoBox));
 }
+
+$('.todo-box-container').on('click', '.completed', function() {
+  var $selectId = $(this).parents('.todo-card').attr('id');
+  var todobox = JSON.parse(localStorage.getItem($selectId));
+  todobox.completed = !todobox.completed;
+  if(todobox.completed == true){
+    $(this).parents('.todo-card').toggleClass('complete-task');
+  }else{
+    $(this).parents('.todo-card').toggleClass('complete-task');
+  }
+  localStorage.setItem($selectId, JSON.stringify(todobox));
+});
 
 //When working with COMPLETED states for project, use conditional to evaluate if completed or not, using OR and BANG (!);
 //if completed || not completed then this.completed == this.completed

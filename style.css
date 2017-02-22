@@ -81,6 +81,10 @@ input:focus {
   position: relative;
 }
 
+.complete-task{
+  background-color: #bbbbbb;
+}
+
 article {
   border-bottom: 2px solid #D1D3D4;
   margin-top: 15px;
