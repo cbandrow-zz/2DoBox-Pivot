@@ -81,6 +81,26 @@ input:focus {
   position: relative;
 }
 
+#show-completed{
+  background-color: #00A79D;
+  border: none;
+  box-sizing: border-box;
+  color: #FFF;
+  font-family: "Open Sans", sans-serif;
+  font-size: 18px;
+  height: 35px;
+  margin: 7px 0 18px 0;
+  width: 60%;
+}
+
+#show-completed:hover {
+  background-color: #045E55;
+}
+
+#show-completed:disabled {
+  background-color: #6D6E71;
+}
+
 .complete-task{
   /*text-decoration: line-through; */
   background-color: #eeeeee;
