@@ -16,7 +16,6 @@ function changeClass($stored2Dos){
     var $completedId = $stored2Dos.id;
     $('#' + $completedId).removeClass('complete-task');
   }
-
 }
 function getStored2Dos (id) {
   return JSON.parse(localStorage.getItem(id));
@@ -35,30 +34,8 @@ $('#save-button').on('click', function() {
   resetInputs();
 });
 
-// var string;
-// function printToDo(toDoObj){
-//   console.log(toDoObj);
-//
-//   string = `<article class="todo-card" id="${toDoObj.id}">
-//     <button class="delete-button"></button>
-//     <section class="search-target">
-//     <h2 class="todo-title" contenteditable>${toDoObj.title}</h2>
-//     <p class="todo-body" contenteditable>${toDoObj.body}</p>
-//     </section>
-//     <section class="priority">
-//       <button class="upvote-button"></button>
-//       <button class="downvote-button"></button>
-//       <button class="completed"> Completed Task</button>
-//       <h3>priority: <span class="current-priority">${toDoObj.priority}</span></h3>
-//     </section>
-//   </article>
-//   `
-//   console.log(string);
-// }
-
 function prepend2DoBox(toDoObj) {
     if(toDoObj.completed == true){
-      // printToDo(toDoObj);
       $('.todo-box-container').append(`<article class="todo-card" id="${toDoObj.id}">
         <button class="delete-button"></button>
         <section class="search-target">
@@ -162,17 +139,6 @@ function changePriority(key, updatedPriority){
 
 
 
-
-//   var $currentPriority = $(this).closest('.todo-card').find('.current-priority');
-//   if ($currentPriority.text() === "swill") {
-//     $currentPriority.text("plausible");
-//   } else if ($currentPriority.text() === "plausible"){
-//     $currentPriority.text("genius");
-//   }
-//   var key = $(this).closest('.todo-card').attr('id');
-//   var updatedPriority = $currentPriority.text();
-//   changePriority(key, updatedPriority);
-// });
 
 $('.todo-box-container').on('click','.downvote-button', function() {
   var $currentPriority = $(this).closest('.todo-card').find('.current-priority');
