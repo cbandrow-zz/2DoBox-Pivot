@@ -35,31 +35,30 @@ $('#save-button').on('click', function() {
   resetInputs();
 });
 
-var string;
-
-function printToDo(toDoObj){
-  console.log(toDoObj);
-
-  string = `<article class="todo-card" id="${toDoObj.id}">
-    <button class="delete-button"></button>
-    <section class="search-target">
-    <h2 class="todo-title" contenteditable>${toDoObj.title}</h2>
-    <p class="todo-body" contenteditable>${toDoObj.body}</p>
-    </section>
-    <section class="quality">
-      <button class="upvote-button"></button>
-      <button class="downvote-button"></button>
-      <button class="completed"> Completed Task</button>
-      <h3>quality: <span class="current-quality">${toDoObj.quality}</span></h3>
-    </section>
-  </article>
-  `
-  console.log(string);
-}
+// var string;
+// function printToDo(toDoObj){
+//   console.log(toDoObj);
+//
+//   string = `<article class="todo-card" id="${toDoObj.id}">
+//     <button class="delete-button"></button>
+//     <section class="search-target">
+//     <h2 class="todo-title" contenteditable>${toDoObj.title}</h2>
+//     <p class="todo-body" contenteditable>${toDoObj.body}</p>
+//     </section>
+//     <section class="quality">
+//       <button class="upvote-button"></button>
+//       <button class="downvote-button"></button>
+//       <button class="completed"> Completed Task</button>
+//       <h3>quality: <span class="current-quality">${toDoObj.quality}</span></h3>
+//     </section>
+//   </article>
+//   `
+//   console.log(string);
+// }
 
 function prepend2DoBox(toDoObj) {
     if(toDoObj.completed == true){
-      printToDo(toDoObj);
+      // printToDo(toDoObj);
       $('.todo-box-container').append(`<article class="todo-card" id="${toDoObj.id}">
         <button class="delete-button"></button>
         <section class="search-target">
@@ -145,14 +144,16 @@ $('.todo-box-container').on('click', '.completed', function() {
   todobox.completed = !todobox.completed;
   if(todobox.completed == true){
     $(this).parents('.todo-card').toggleClass('complete-task');
+    $(this).parents('.todo-card').appendTo($('.todo-box-container'));
   }else{
     $(this).parents('.todo-card').toggleClass('complete-task');
   }
   localStorage.setItem($selectId, JSON.stringify(todobox));
 });
 
-//When working with COMPLETED states for project, use conditional to evaluate if completed or not, using OR and BANG (!);
-//if completed || not completed then this.completed == this.completed
+$('#show-completed').on('click', function() {
+  $(".complete-task").prependTo($('.todo-box-container'));
+});
 
 $('.todo-box-container').on('focus', '.todo-title, .todo-body', function() {
   var $container = $(this);
