@@ -28,6 +28,7 @@ function editTitle(driver) {
  driver.findElement(By.className('todo-title')).click();
  driver.sleep(3000);
  driver.findElement(By.className('todo-title')).sendKeys('HELLO!');
+
  driver.sleep(3000);
  driver.findElement(By.className('make-todo-teal')).click();
  driver.sleep(3000);
