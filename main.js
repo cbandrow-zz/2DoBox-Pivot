@@ -15,11 +15,7 @@ function hideToDos(a, b, c){
 var i = 0;
 $('#more-todos').on('click', function() {
   i+=5;
-  console.log(i);
   hideToDos(0, 9 + i, 10 + i);
-  // $("article").slice(0,14).css("display", "block");
-  console.log('second i', i)
-  // $("article").slice(15).css("display", "none");
 });
 
 function changeClass($stored2Dos){
@@ -27,7 +23,7 @@ function changeClass($stored2Dos){
   var someId = $stored2Dos.id
   if($stored2Dos.completed == true){
     var $completedId = $stored2Dos.id;
-    $('#'+ $completedId).removeClass('complete-task').addClass('complete-task');
+    $('#' + $completedId).removeClass('complete-task').addClass('complete-task');
   } else if ($stored2Dos.completed == false){
     var $completedId = $stored2Dos.id;
     $('#' + $completedId).removeClass('complete-task');
@@ -50,46 +46,33 @@ $('#save-button').on('click', function() {
   resetInputs();
 });
 
+var card;
 function writeCard(toDoObj){
-  
+  card =
+  `<article class="todo-card hidden" id="${toDoObj.id}">
+    <button class="delete-button"></button>
+    <section class="search-target">
+      <h2 class="todo-title" contenteditable>${toDoObj.title}</h2>
+      <p class="todo-body" contenteditable>${toDoObj.body}</p>
+    </section>
+    <section class="priority">
+      <button class="upvote-button"></button>
+      <button class="downvote-button"></button>
+      <button class="completed"> Completed Task</button>
+      <h3>priority: <span class="current-priority">${toDoObj.priority}</span></h3>
+    </section>
+  </article>`
+  return card;
 }
 
 function prepend2DoBox(toDoObj) {
+  writeCard(toDoObj)
     if(toDoObj.completed == true){
-      $('.todo-box-container').append(`<article class="todo-card hidden" id="${toDoObj.id}">
-        <button class="delete-button"></button>
-        <section class="search-target">
-        <h2 class="todo-title" contenteditable>${toDoObj.title}</h2>
-        <p class="todo-body" contenteditable>${toDoObj.body}</p>
-        </section>
-        <section class="priority">
-          <button class="upvote-button"></button>
-          <button class="downvote-button"></button>
-          <button class="completed"> Completed Task</button>
-          <h3>priority: <span class="current-priority">${toDoObj.priority}</span></h3>
-        </section>
-      </article>
-      `);
+      $('.todo-box-container').append(card);
     } else if (toDoObj.completed == false){
-      $('.todo-box-container').prepend(
-        `<article class="todo-card hidden" id="${toDoObj.id}">
-          <button class="delete-button"></button>
-          <section class="search-target">
-          <h2 class="todo-title" contenteditable>${toDoObj.title}</h2>
-          <p class="todo-body" contenteditable>${toDoObj.body}</p>
-          </section>
-          <section class="priority">
-            <button class="upvote-button"></button>
-            <button class="downvote-button"></button>
-            <button class="completed"> Completed Task</button>
-            <h3>priority: <span class="current-priority">${toDoObj.priority}</span></h3>
-          </section>
-        </article>
-        `
-      )
+      $('.todo-box-container').prepend(card);
   }
 }
-
 
 $('.todo-box-container').on('click', '.delete-button', (function() {
   var selectId = $(this).parents('.todo-card').attr('id')
@@ -97,17 +80,14 @@ $('.todo-box-container').on('click', '.delete-button', (function() {
   localStorage.removeItem(selectId)
 }))
 
-
 function resetInputs(){
   $('#title-input, #body-input').val("");
   $('#save-button').prop('disabled', true);
 }
 
-
 $('#title-input, #body-input').on('keyup', function(){
   $('#save-button').prop('disabled', false);
 });
-
 
 $('.todo-box-container').on('click','.upvote-button' , function() {
   var $currentPriority = $(this).closest('.todo-card').find('.current-priority');
@@ -132,7 +112,6 @@ $('.todo-box-container').on('click','.upvote-button' , function() {
   changePriority(key, updatedPriority);
 });
 
-
 $('.todo-box-container').on('click','.downvote-button' , function() {
   var $currentPriority = $(this).closest('.todo-card').find('.current-priority');
   var key = $(this).closest('.todo-card').attr('id');
@@ -156,7 +135,6 @@ $('.todo-box-container').on('click','.downvote-button' , function() {
   changePriority(key, updatedPriority);
 });
 
-
 function changePriority(key, updatedPriority){
   var toDoBox = JSON.parse(localStorage.getItem(key));
   toDoBox.priority = updatedPriority;
@@ -175,7 +153,6 @@ $('.todo-box-container').on('click','.downvote-button', function() {
   changePriority(key, updatedPriority);
 });
 
-
 $('.todo-box-container').on('click', '.completed', function() {
   var $selectId = $(this).parents('.todo-card').attr('id');
   var todobox = JSON.parse(localStorage.getItem($selectId));
@@ -190,11 +167,9 @@ $('.todo-box-container').on('click', '.completed', function() {
   console.log(todobox.priority);
 });
 
-
 $('#show-completed').on('click', function() {
   $(".complete-task").prependTo($('.todo-box-container'));
 });
-
 
 $('.todo-box-container').on('focus', '.todo-title, .todo-body', function() {
   var $container = $(this);
@@ -210,7 +185,6 @@ $('.todo-box-container').on('focus', '.todo-title, .todo-body', function() {
   saveChange($container, key, todobox);
 });
 
-
 function saveChange($container, key, todobox){
   $container.on('blur', function() {
     todobox.title = $container.closest('.todo-card').find('.todo-title').text();
@@ -219,14 +193,11 @@ function saveChange($container, key, todobox){
   });
 };
 
-
 $('#search-input').on('keyup',function (){
   var searchValue = $(this).val().toLowerCase();
   $('.search-target').each(function(){
     var text = $(this).text().toLowerCase();
     var isAMatch = !!text.match(searchValue);
     $(this).closest('.todo-card').toggle(isAMatch);
-
   });
-
 });
