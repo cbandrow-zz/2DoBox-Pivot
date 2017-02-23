@@ -44,6 +44,7 @@ $('#save-button').on('click', function() {
   localStorage.setItem(key, JSON.stringify($new2Do));
   prepend2DoBox($new2Do);
   resetInputs();
+  hideToDos(0, 9, 10);
 });
 
 var card;
@@ -153,6 +154,29 @@ $('.todo-box-container').on('click','.downvote-button', function() {
   changePriority(key, updatedPriority);
 });
 
+
+// $(".radio").on('click', function() {
+//   var prioritySort = $("input[name=sort]:checked").val();
+//   console.log(prioritySort);
+//   var pants = $(`span:contains(${prioritySort})`)
+//   console.log(pants);
+  // var element = $(".todo-box-container").find(prioritySort);
+  // console.log(element);
+  //
+  // for (var i = 0; i < localStorage.length; i++){
+  //   var $stored2Dos = getStored2Dos(localStorage.key(i));
+  //   console.log($stored2Dos);
+  //   var todobox = JSON.parse(localStorage.getItem($stored2Dos));
+  //   console.log(todobox(i).priority);
+  //   if (prioritySort == todobox.priority){
+  //     $("#" + $stored2Dos).css('display', 'block');
+  //   } else if (prioritySort !== todobox.priority){
+  //     $("article").css('display', 'none');
+  //   }
+  // }
+// })
+
+
 $('.todo-box-container').on('click', '.completed', function() {
   var $selectId = $(this).parents('.todo-card').attr('id');
   var todobox = JSON.parse(localStorage.getItem($selectId));
@@ -165,6 +189,7 @@ $('.todo-box-container').on('click', '.completed', function() {
   }
   localStorage.setItem($selectId, JSON.stringify(todobox));
   console.log(todobox.priority);
+  hideToDos(0, 9, 10);
 });
 
 $('#show-completed').on('click', function() {
