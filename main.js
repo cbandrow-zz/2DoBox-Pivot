@@ -59,9 +59,9 @@ function writeCard(toDoObj){
     <section class="priority">
       <button class="upvote-button"></button>
       <button class="downvote-button"></button>
-      <button class="completed"> Completed Task</button>
       <h3>priority: <span class="current-priority">${toDoObj.priority}</span></h3>
     </section>
+    <button class="completed"> Completed Task</button>
   </article>`
   return card;
 }
@@ -155,9 +155,8 @@ $('.todo-box-container').on('click','.downvote-button', function() {
 });
 
 
-$(".radio").on('click', function() {
-  var toSort = $("input[name=sort]:checked").val();
-  console.log(toSort);
+$(".button").on('click', function() {
+  var toSort = $(this).val();
   for (var i = 0; i < localStorage.length; i++){
     var $stored2Dos = getStored2Dos(localStorage.key(i));
     sortPriority($stored2Dos, toSort);
@@ -167,8 +166,6 @@ $(".radio").on('click', function() {
 function sortPriority($stored2Dos, toSort){
   var objPriority = $stored2Dos.priority;
   var someId = $stored2Dos.id;
-  console.log(objPriority, "priority")
-  console.log(someId, "someId")
   if (toSort === "All"){
     $('#' + someId).show();
   } else if(objPriority !== toSort){
