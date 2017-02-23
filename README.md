@@ -1,13 +1,6 @@
-##Idea box
+## 2Do Box
 
-Project scope: use HTML, CSS, JavaScript, and jQuery to build an app that takes user inputs of a title and idea description. The app will save the information to localStorage on the browser.
+#### Synopsis
 
-...Match the design comp and use the specified colors and design identity.
-
-...There is a search function that searches the text in the idea cards dynamically.
-
-...There is capability to assign a quality rating for each idea.
-
-...When an idea is deleted, it does not return on page refresh.
-
-...**Keep your ideas organized with IdeaBox**.
+For this project we pivoted our IdeaBox ideas and turned it into a 2DoBox.
+2DoBox relies on a similar principle: user's can enter in a new 2Do task and have it saved to a page. It can be amended at any time by clicking the title or body text. One can assign a priority to the task from having low priority to critical priority. 2Do's can be sorted by completion or priority as well.
