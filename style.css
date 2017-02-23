@@ -30,6 +30,13 @@ h1 {
   padding-left: 5px;
   width: 80%;
 }
+input[type="radio"]{
+  display: inline-block;
+}
+
+.radio{
+  display: inline-block;
+}
 
 .small-input {
   height: 26px;
