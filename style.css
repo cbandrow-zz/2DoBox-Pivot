@@ -1,3 +1,12 @@
+/*
+#CD9DED
+#AE9CE5
+#CDD9FF
+#AFCCE8
+#C0F1FF
+*/
+
+
 body {
   background-color: #FFF;
   box-sizing: border-box;
@@ -11,12 +20,12 @@ h1 {
 }
 
 .make-todo-teal {
-  color: #00A79D;
+  color: #AE9CE5;
 }
 
 .top-section {
   align-items: center;
-  background-color: #E5F3F2;
+  background-color: #eeefff;
   display: flex;
   flex-direction: column;
 }
@@ -34,14 +43,17 @@ h1 {
 input[type="button"] {
   margin: 5px 5px 0 5px;
   width: 29%;
-  background-color: #00A79D;
+  background-color: #AFCCE8;
   border: none;
   box-sizing: border-box;
   color: #FFF;
 }
 
 input[type="button"]:hover {
-  background-color: #045E55;
+  background-color: #9AB4D4;
+}
+input[type="button"]:focus {
+  outline: 2px solid #aaaacf;
 }
 
 
@@ -72,7 +84,7 @@ input:focus {
 }
 
 #save-button {
-  background-color: #00A79D;
+  background-color: #AE9CE5;
   border: none;
   box-sizing: border-box;
   color: #FFF;
@@ -84,7 +96,7 @@ input:focus {
 }
 
 #save-button:hover {
-  background-color: #045E55;
+  background-color: #CD9DED;
 }
 
 #save-button:disabled {
@@ -92,7 +104,7 @@ input:focus {
 }
 
 #more-todos {
-  background-color: #00A79D;
+  background-color: #AE9CE5;
   border: none;
   box-sizing: border-box;
   color: #FFF;
@@ -104,7 +116,7 @@ input:focus {
 }
 
 #more-todos:hover {
-  background-color: #045E55;
+  background-color: #CD9DED;
 }
 
 #more-todos:disabled {
@@ -127,7 +139,7 @@ input:focus {
 }
 
 #show-completed{
-  background-color: #00A79D;
+  background-color: #AE9CE5;
   border: none;
   box-sizing: border-box;
   color: #FFF;
@@ -139,7 +151,7 @@ input:focus {
 }
 
 #show-completed:hover {
-  background-color: #045E55;
+  background-color: #CD9DED;
 }
 
 #show-completed:disabled {
@@ -171,6 +183,10 @@ h2 {
 p {
   color: #939598;
   font-size: 18px;
+}
+
+button:focus{
+  outline: none;
 }
 
 .delete-button,
@@ -228,7 +244,7 @@ h3{
 }
 
 .completed {
-  background-color: #00A79D;
+  background-color: #AE9CE5;
   border: none;
   box-sizing: border-box;
   color: #FFF;
@@ -238,7 +254,7 @@ h3{
 }
 
 .completed:hover {
-  background-color: #045E55;
+  background-color: #CD9DED;
 }
 
 @media screen and (max-width: 640px){
