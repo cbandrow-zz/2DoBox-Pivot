@@ -155,26 +155,28 @@ $('.todo-box-container').on('click','.downvote-button', function() {
 });
 
 
-// $(".radio").on('click', function() {
-//   var prioritySort = $("input[name=sort]:checked").val();
-//   console.log(prioritySort);
-//   var pants = $(`span:contains(${prioritySort})`)
-//   console.log(pants);
-  // var element = $(".todo-box-container").find(prioritySort);
-  // console.log(element);
-  //
-  // for (var i = 0; i < localStorage.length; i++){
-  //   var $stored2Dos = getStored2Dos(localStorage.key(i));
-  //   console.log($stored2Dos);
-  //   var todobox = JSON.parse(localStorage.getItem($stored2Dos));
-  //   console.log(todobox(i).priority);
-  //   if (prioritySort == todobox.priority){
-  //     $("#" + $stored2Dos).css('display', 'block');
-  //   } else if (prioritySort !== todobox.priority){
-  //     $("article").css('display', 'none');
-  //   }
-  // }
-// })
+$(".radio").on('click', function() {
+  var toSort = $("input[name=sort]:checked").val();
+  console.log(toSort);
+  for (var i = 0; i < localStorage.length; i++){
+    var $stored2Dos = getStored2Dos(localStorage.key(i));
+    sortPriority($stored2Dos, toSort);
+  }
+});
+
+function sortPriority($stored2Dos, toSort){
+  var objPriority = $stored2Dos.priority;
+  var someId = $stored2Dos.id;
+  console.log(objPriority, "priority")
+  console.log(someId, "someId")
+  if (toSort === "All"){
+    $('#' + someId).show();
+  } else if(objPriority !== toSort){
+    $('#' + someId).hide();
+  } else if (objPriority == toSort){
+    $('#' + someId).show();
+  }
+}
 
 
 $('.todo-box-container').on('click', '.completed', function() {
