@@ -28,14 +28,32 @@ h1 {
   font-size: 18px;
   margin: 5px 20px;
   padding-left: 5px;
-  width: 80%;
-}
-input[type="radio"]{
-  display: inline-block;
+  width: 60%;
 }
 
-.radio{
-  display: inline-block;
+input[type="button"] {
+  margin: 5px 5px 0 5px;
+  width: 29%;
+  background-color: #00A79D;
+  border: none;
+  box-sizing: border-box;
+  color: #FFF;
+}
+
+input[type="button"]:hover {
+  background-color: #045E55;
+}
+
+
+.sort-buttons{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 15px 0;
+  width: 61%;
+
 }
 
 .small-input {
@@ -62,7 +80,7 @@ input:focus {
   font-size: 18px;
   height: 35px;
   margin: 7px 0 18px 0;
-  width: 80%;
+  width: 60%;
 }
 
 #save-button:hover {
@@ -81,7 +99,7 @@ input:focus {
   font-family: "Open Sans", sans-serif;
   font-size: 18px;
   height: 35px;
-  margin: 7px 0 18px 0;
+  margin: 7px 0 -6px 0;
   width: 60%;
 }
 
@@ -116,7 +134,7 @@ input:focus {
   font-family: "Open Sans", sans-serif;
   font-size: 18px;
   height: 35px;
-  margin: 7px 0 18px 0;
+  margin: 7px 0 6px 0;
   width: 60%;
 }
 
@@ -129,7 +147,6 @@ input:focus {
 }
 
 .complete-task{
-  /*text-decoration: line-through; */
   background-color: #eeeeee;
 }
 
@@ -138,7 +155,7 @@ article {
   margin-top: 15px;
   min-height: 100px;
   padding-left: 5px;
-  width: 80%;
+  width: 60%;
 }
 
 h2 {
@@ -210,17 +227,24 @@ h3{
   font-weight: 500;
 }
 
-@media screen and (min-width: 640px){
+.completed {
+  background-color: #00A79D;
+  border: none;
+  box-sizing: border-box;
+  color: #FFF;
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+  margin-bottom: 14px;
+}
+
+.completed:hover {
+  background-color: #045E55;
+}
+
+@media screen and (max-width: 640px){
 
   h1{
     font-size: 2.5em;
-  }
-
-  .input,
-  textarea,
-  #save-button,
-  article {
-    width: 60%;
   }
 
   textarea {
@@ -231,4 +255,18 @@ h3{
     max-height: 200px;
     overflow: scroll;
   }
+
+  .input,
+  textarea,
+  #save-button,
+  #show-completed,
+  #more-todos,
+  article {
+    width: 80%;
+  }
+
+  .sort-buttons {
+    width: 82%;
+  }
+
 }
