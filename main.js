@@ -7,9 +7,9 @@ $(function () {
   }
 });
 
-function hideToDos(a, b, c){
-  $("article").slice(a, b).css("display", "block");
-  $("article").slice(c).css("display", "none");
+function hideToDos(start, end, after){
+  $("article").slice(start, end).css("display", "block");
+  $("article").slice(after).css("display", "none");
 }
 
 var i = 0;
@@ -141,18 +141,6 @@ function changePriority(key, updatedPriority){
   toDoBox.priority = updatedPriority;
   localStorage.setItem(key, JSON.stringify(toDoBox));
 }
-
-$('.todo-box-container').on('click','.downvote-button', function() {
-  var $currentPriority = $(this).closest('.todo-card').find('.current-priority');
-  if ($currentPriority.text() === "genius") {
-    $currentPriority.text("plausible");
-  } else if ($currentPriority.text() === "plausible"){
-    $currentPriority.text("swill");
-  }
-  var key = $(this).closest('.todo-card').attr('id');
-  var updatedPriority = $currentPriority.text();
-  changePriority(key, updatedPriority);
-});
 
 
 $(".button").on('click', function() {
