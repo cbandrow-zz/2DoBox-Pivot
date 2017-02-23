@@ -3,18 +3,23 @@ $(function () {
     var $stored2Dos = getStored2Dos(localStorage.key(i));
     prepend2DoBox($stored2Dos);
     changeClass($stored2Dos);
-    hideToDos();
+    hideToDos(0, 9, 10);
   }
 });
 
-function hideToDos(){
-  $("article").slice(0,9).css("display", "block");
-  $("article").slice(10).css("display", "none");
+function hideToDos(a, b, c){
+  $("article").slice(a, b).css("display", "block");
+  $("article").slice(c).css("display", "none");
 }
 
+var i = 0;
 $('#more-todos').on('click', function() {
-  $("article").slice(0,14).css("display", "block");
-  $("article").slice(15).css("display", "none");
+  i+=5;
+  console.log(i);
+  hideToDos(0, 9 + i, 10 + i);
+  // $("article").slice(0,14).css("display", "block");
+  console.log('second i', i)
+  // $("article").slice(15).css("display", "none");
 });
 
 function changeClass($stored2Dos){
@@ -44,6 +49,10 @@ $('#save-button').on('click', function() {
   prepend2DoBox($new2Do);
   resetInputs();
 });
+
+function writeCard(toDoObj){
+  
+}
 
 function prepend2DoBox(toDoObj) {
     if(toDoObj.completed == true){
@@ -217,5 +226,7 @@ $('#search-input').on('keyup',function (){
     var text = $(this).text().toLowerCase();
     var isAMatch = !!text.match(searchValue);
     $(this).closest('.todo-card').toggle(isAMatch);
+
   });
+
 });
